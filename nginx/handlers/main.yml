@@ -1,0 +1,10 @@
+---
+- name: configtest nginx
+  command: nginx -t
+  register: nginx_configtest_result
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+  when: nginx_configtest_result|success
